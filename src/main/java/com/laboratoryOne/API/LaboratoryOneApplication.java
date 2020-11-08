@@ -1,4 +1,4 @@
-package com.laboratoryOne;
+package com.laboratoryOne.API;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
