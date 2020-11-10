@@ -7,7 +7,9 @@ import com.laboratoryOne.Model.Movie;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,8 +45,14 @@ public class MoviesController {
             return null;
     }
 
+    @PostMapping("/addMovie")
+    public String add(@RequestBody Movie newMovie) {
+        listMovies.add(new Movie("Title", 2000, "Poster"));
+        return "redirect:/movies";
+    }
+
     @PutMapping("/updateMovie")
-    public void updateMovie(@RequestParam(name = "id", required = true, defaultValue = "0") int id, @RequestParam(name = "title", required = false, defaultValue = "") String title,
+    public void update(@RequestParam(name = "id", required = true, defaultValue = "0") int id, @RequestParam(name = "title", required = false, defaultValue = "") String title,
         @RequestParam(name = "year", required = false, defaultValue = "0") int year, @RequestParam(name = "poster", required = false, defaultValue = "") String poster) {
 
             Movie newMovie = new Movie(title, year, poster);
@@ -57,7 +65,7 @@ public class MoviesController {
     }
 
     @DeleteMapping("/deleteMovie")
-    public void deleteMovie(@RequestParam(name = "id", required = true, defaultValue = "0") int id) {
+    public void delete(@RequestParam(name = "id", required = true, defaultValue = "0") int id) {
         for (Movie movie : listMovies) {
             if (id == movie.getId()) {
                 listMovies.remove(movie);
