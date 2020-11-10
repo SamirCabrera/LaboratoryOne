@@ -2,6 +2,8 @@ package com.laboratoryOne.API.Movies;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import com.laboratoryOne.Model.Movie;
 
@@ -39,6 +41,13 @@ public class MoviesController {
             }
 
             return null;
+    }
+
+    @GetMapping("/text/movie")
+    public String textMovie(Locale local) {
+        ResourceBundle messages = ResourceBundle.getBundle("i18n\\movie", local);
+
+        return messages.getString("MOVIE_TITLE");
     }
 
     private ArrayList<Movie> searchByTitle(String title) {
