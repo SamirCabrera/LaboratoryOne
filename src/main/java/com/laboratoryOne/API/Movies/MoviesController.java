@@ -5,7 +5,9 @@ import java.util.Arrays;
 
 import com.laboratoryOne.Model.Movie;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +41,28 @@ public class MoviesController {
             }
 
             return null;
+    }
+
+    @PutMapping("/updateMovie")
+    public void updateMovie(@RequestParam(name = "id", required = true, defaultValue = "0") int id, @RequestParam(name = "title", required = false, defaultValue = "") String title,
+        @RequestParam(name = "year", required = false, defaultValue = "0") int year, @RequestParam(name = "poster", required = false, defaultValue = "") String poster) {
+
+            Movie newMovie = new Movie(title, year, poster);
+
+            for (Movie movie : listMovies) {
+                if (id == movie.getId()) {
+                    movie = newMovie;
+                }
+            }
+    }
+
+    @DeleteMapping("/deleteMovie")
+    public void deleteMovie(@RequestParam(name = "id", required = true, defaultValue = "0") int id) {
+        for (Movie movie : listMovies) {
+            if (id == movie.getId()) {
+                listMovies.remove(movie);
+            }
+        }
     }
 
     private ArrayList<Movie> searchByTitle(String title) {
