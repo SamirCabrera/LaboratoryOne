@@ -2,6 +2,7 @@ package com.laboratoryOne.API.Movies;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -9,6 +10,7 @@ import com.laboratoryOne.Model.Movie;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,9 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MoviesController {
     
-    public static ArrayList<Movie> listMovies = new ArrayList<>(Arrays.asList(new Movie("Title1", 2001, "Poster1"), new Movie("Title2", 2002, "Poster ")));
-
-    final Movie x = new Movie("Title", 2000, "Poster");
+    public static List<Movie> listMovies = Arrays.asList(new Movie("Title1", 2001), new Movie("Title2", 2002));
 
     @GetMapping("/text/movie")
     public String textMovie(Locale local) {
@@ -30,14 +30,13 @@ public class MoviesController {
     }
 
     @GetMapping("/getAllMovie")
-    public ArrayList<Movie> getMovies() {
-        listMovies.add(x);
+    public List<Movie> getMovies() {
         return listMovies;
     }
 
     @GetMapping("/searchMovies")
-    public ArrayList<Movie> searchMovie(@RequestParam(name = "title", required = false, defaultValue = "") String title, 
-            @RequestParam(name = "year", required = false, defaultValue = "0") int year) {
+    public List<Movie> searchMovie(@RequestParam(name = "year", required = false, defaultValue = "0") int year, 
+    @RequestParam(name = "title", required = false, defaultValue = "") String title) {
             
             if (year != 0 && title != "") {
                 return searchByTitleAndYear(year, title);
@@ -55,22 +54,23 @@ public class MoviesController {
     }
 
     @PostMapping("/addMovie")
-    public String add(@RequestBody Movie newMovie) {
-        listMovies.add(new Movie(newMovie.getTitle(), newMovie.getYear(), newMovie.getImgPoster()));
-        return "redirect:/movies";
+    public void add(@RequestBody Movie newMovie) {
+        listMovies.add(new Movie(newMovie.getTitle(), newMovie.getYear()));
     }
 
-    @PutMapping("/updateMovie")
-    public void update(@RequestParam(name = "id", required = true, defaultValue = "0") int id, @RequestParam(name = "title", required = false, defaultValue = "") String title,
-        @RequestParam(name = "year", required = false, defaultValue = "0") int year, @RequestParam(name = "poster", required = false, defaultValue = "") String poster) {
-
-            Movie newMovie = new Movie(title, year, poster);
+    @PutMapping("/updateMovie/{id}")
+    public Movie update(@RequestBody Movie movieUpdate, @PathVariable("id") int id) {
+            Movie m = new Movie();
 
             for (Movie movie : listMovies) {
                 if (id == movie.getId()) {
-                    movie = newMovie;
+                    movie.setTitle(movieUpdate.getTitle());
+                    movie.setYear(movieUpdate.getYear());
+                    m = movie;
                 }
             }
+            
+            return m;
     }
 
     @DeleteMapping("/deleteMovie")
@@ -82,8 +82,18 @@ public class MoviesController {
         }
     }
 
-    private ArrayList<Movie> searchByTitle(String title) {
-        ArrayList<Movie> titleMovies = new ArrayList<>();
+    public static Movie findById(int id) {
+        for (Movie movie : listMovies) {
+            if (id == movie.getId()) {
+                return movie;
+            }
+        }
+
+        return null;
+    }
+
+    private List<Movie> searchByTitle(String title) {
+        List<Movie> titleMovies = new ArrayList<>();
 
         for (Movie movie : listMovies) {
             if (title.contains(movie.getTitle())) {
@@ -94,8 +104,8 @@ public class MoviesController {
         return titleMovies;
     }
 
-    private ArrayList<Movie> searchByYear(int year) {
-        ArrayList<Movie> yearMovie = new ArrayList<>();
+    private List<Movie> searchByYear(int year) {
+        List<Movie> yearMovie = new ArrayList<>();
 
         for (Movie movie : listMovies) {
             if (year == movie.getYear()) {
@@ -106,8 +116,8 @@ public class MoviesController {
         return yearMovie;
     }
 
-    private ArrayList<Movie> searchByTitleAndYear(int year, String title) {
-        ArrayList<Movie> movies = new ArrayList<>();
+    private List<Movie> searchByTitleAndYear(int year, String title) {
+        List<Movie> movies = new ArrayList<>();
 
         movies = cloneList(searchByYear(year), movies);
         movies = cloneList(searchByTitle(title), movies);
@@ -115,8 +125,8 @@ public class MoviesController {
         return movies;
     }
 
-    private ArrayList<Movie> cloneList(ArrayList<Movie> a, ArrayList<Movie> b) {
-        ArrayList<Movie> c = null;
+    private List<Movie> cloneList(List<Movie> a, List<Movie> b) {
+        List<Movie> c = null;
 
         for (int i = 0; i < a.size(); i++) {
             b.add(a.get(i));
