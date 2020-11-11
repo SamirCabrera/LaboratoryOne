@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" th:src="@{movies/movie.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <title>Document</title>
+    </head>
+
+    <body>  
+
+        <select id="locales" onchange="changeLang()">
+    
+            <option value=""></option>
+    
+            <option value="en" th:text="#{ENGLISH}"></option>
+    
+            <option value="es" th:text="#{SPANISH}"></option>
+    
+        </select>
+
+        <li th:each="movie : ${movies}"
+            th:object="${movie}">
+
+            <label>
+                <span th:utext="#{TITLE}"></span>
+            </label>
+            <span style="color: red;"
+                th:text="*{title}">
+            </span>
+
+            <label>
+                <span th:utext="#{YEAR}"></span>
+            </label>
+            <span style="color: blue;"
+                th:text="*{year}">
+            </span>
+
+
+        </li>
+
+        <form th:action="@{/add}" th:each="movie : ${movies}" th:object="${movie}" method="POST">
+
+            <div>
+                <label>
+                    <span th:utext="#{TITLE}"></span>
+                </label>
+                <input th:value="*{title}">
+            </div>
+
+            <div>
+                <label>
+                    <span th:utext="#{YEAR}"></span>
+                </label>
+                <input th:value="*{year}">
+            </div>
+
+            <div>
+                <label>
+                    <span>Poster</span>
+                </label>
+                <input th:value="*{imgPoster}">
+            </div>
+
+            <div>
+                <input type="submit">
+            </div>
+
+        </form>
+
+    </body>
+
+</html>
