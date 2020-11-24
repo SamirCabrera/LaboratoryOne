@@ -4,15 +4,17 @@ public class Movie {
     
     public Movie() { }
 
-    public Movie(String _title, int _year) {
+    public Movie(String _title, int _year, String _poster) {
         this.id = idCounter++; 
         this.title = _title;
         this.year = _year;
+        this.poster = _poster;
     }
 
     private String title;
     private int year;
     private int id;
+    private String poster;
     private static int idCounter = 1;
 
     public String getTitle() {
@@ -38,4 +40,10 @@ public class Movie {
         this.id = id;
     }
     
+    public String getPoster() {
+        return poster;
+    }
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
 }

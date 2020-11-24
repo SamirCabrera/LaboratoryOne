@@ -20,7 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MoviesController {
     
-    public static List<Movie> listMovies = Arrays.asList(new Movie("Title1", 2001), new Movie("Title2", 2002));
+    public static List<Movie> listMovies = Arrays.asList(new Movie("Title1", 2001, "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FPosterOffice-Avengers-Infinity-Advance-Poster%2Fdp%2FB07BMPXQTC&psig=AOvVaw3DJGeARAJ59rV1pMsF6y8D&ust=1606305871465000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKj4jemRm-0CFQAAAAAdAAAAABAF"),
+     new Movie("Title2", 2002, "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FPosterOffice-Avengers-Infinity-Advance-Poster%2Fdp%2FB07BMPXQTC&psig=AOvVaw3DJGeARAJ59rV1pMsF6y8D&ust=1606305871465000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKj4jemRm-0CFQAAAAAdAAAAABAF"));
 
     @GetMapping("/text/movie")
     public String textMovie(Locale local) {
@@ -55,7 +56,7 @@ public class MoviesController {
 
     @PostMapping("/addMovie")
     public void add(@RequestBody Movie newMovie) {
-        listMovies.add(new Movie(newMovie.getTitle(), newMovie.getYear()));
+        listMovies.add(new Movie(newMovie.getTitle(), newMovie.getYear(), newMovie.getPoster()));
     }
 
     @PutMapping("/updateMovie/{id}")
