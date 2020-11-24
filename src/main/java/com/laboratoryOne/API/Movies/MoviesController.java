@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MoviesController {
     
-    public static List<Movie> listMovies = Arrays.asList(new Movie("Title1", 2001, "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FPosterOffice-Avengers-Infinity-Advance-Poster%2Fdp%2FB07BMPXQTC&psig=AOvVaw3DJGeARAJ59rV1pMsF6y8D&ust=1606305871465000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKj4jemRm-0CFQAAAAAdAAAAABAF"),
-     new Movie("Title2", 2002, "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FPosterOffice-Avengers-Infinity-Advance-Poster%2Fdp%2FB07BMPXQTC&psig=AOvVaw3DJGeARAJ59rV1pMsF6y8D&ust=1606305871465000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKj4jemRm-0CFQAAAAAdAAAAABAF"));
+    public static List<Movie> listMovies = Arrays.asList(new Movie("Title1", 2001, "https://images-na.ssl-images-amazon.com/images/I/81En6m%2BG2%2BL._AC_SY741_.jpg"),
+     new Movie("Title2", 2002, "https://images-na.ssl-images-amazon.com/images/I/81En6m%2BG2%2BL._AC_SY741_.jpg"));
 
     @GetMapping("/text/movie")
     public String textMovie(Locale local) {
@@ -36,7 +36,7 @@ public class MoviesController {
     }
 
     @GetMapping("/searchMovies")
-    public List<Movie> searchMovie(@RequestParam(name = "year", required = false, defaultValue = "0") int year, 
+    public static List<Movie> searchMovie(@RequestParam(name = "year", required = false, defaultValue = "0") int year, 
     @RequestParam(name = "title", required = false, defaultValue = "") String title) {
             
             if (year != 0 && title != "") {
@@ -93,7 +93,7 @@ public class MoviesController {
         return null;
     }
 
-    private List<Movie> searchByTitle(String title) {
+    private static List<Movie> searchByTitle(String title) {
         List<Movie> titleMovies = new ArrayList<>();
 
         for (Movie movie : listMovies) {
@@ -105,7 +105,7 @@ public class MoviesController {
         return titleMovies;
     }
 
-    private List<Movie> searchByYear(int year) {
+    private static List<Movie> searchByYear(int year) {
         List<Movie> yearMovie = new ArrayList<>();
 
         for (Movie movie : listMovies) {
@@ -117,7 +117,7 @@ public class MoviesController {
         return yearMovie;
     }
 
-    private List<Movie> searchByTitleAndYear(int year, String title) {
+    private static List<Movie> searchByTitleAndYear(int year, String title) {
         List<Movie> movies = new ArrayList<>();
 
         movies = cloneList(searchByYear(year), movies);
@@ -126,7 +126,7 @@ public class MoviesController {
         return movies;
     }
 
-    private List<Movie> cloneList(List<Movie> a, List<Movie> b) {
+    private static List<Movie> cloneList(List<Movie> a, List<Movie> b) {
         List<Movie> c = null;
 
         for (int i = 0; i < a.size(); i++) {
