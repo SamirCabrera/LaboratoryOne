@@ -26,3 +26,5 @@ function searchMovie(year, title) {
 function insertJson(data) {
     document.getElementById("json").innerHTML = JSON.stringify(data, undefined, 3);
 }
+
+

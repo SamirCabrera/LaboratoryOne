@@ -4,23 +4,24 @@ public class Movie {
     
     public Movie() { }
 
-    public Movie(String _title, int _year, String _poster) {
+    public Movie(String _title, int _year, String _poster, String _synopsis) {
         this.id = idCounter++; 
         this.title = _title;
         this.year = _year;
         this.poster = _poster;
+        this.synopsis = _synopsis;
     }
 
     private String title;
     private int year;
     private int id;
     private String poster;
+    private String synopsis;
     private static int idCounter = 1;
 
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -28,7 +29,6 @@ public class Movie {
     public int getYear() {
         return year;
     }
-
     public void setYear(int year) {
         this.year = year;
     }
@@ -46,4 +46,12 @@ public class Movie {
     public void setPoster(String poster) {
         this.poster = poster;
     }
+
+    public String getSynopsis() {
+        return synopsis;
+    }
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
 }
+

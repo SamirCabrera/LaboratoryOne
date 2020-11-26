@@ -20,8 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MoviesController {
     
-    public static List<Movie> listMovies = Arrays.asList(new Movie("Title1", 2001, "https://images-na.ssl-images-amazon.com/images/I/81En6m%2BG2%2BL._AC_SY741_.jpg"),
-     new Movie("Title2", 2002, "https://images-na.ssl-images-amazon.com/images/I/81En6m%2BG2%2BL._AC_SY741_.jpg"));
+    public static List<Movie> listMovies = Arrays.asList(
+        new Movie("Avenger: Infity Wars", 2018, "https://images-na.ssl-images-amazon.com/images/I/81En6m%2BG2%2BL._AC_SY741_.jpg", "Esta es la descripcion de la pelicula"),
+        new Movie("Avenger: End Game", 2019, "https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg", "Esta es la descripcion de la pelicula1"),
+        new Movie("Doctor Strage", 2016, "https://images-na.ssl-images-amazon.com/images/I/71gyLVWIfIL._AC_SL1032_.jpg", "Esta es la descripcion de la pelicula2"),
+        new Movie("Ant-Man", 2015, "https://images-na.ssl-images-amazon.com/images/I/71E9abm2ayL._AC_SL1111_.jpg", "Esta es la descripcion de la pelicula3"),
+        new Movie("Thor: Ragnarok", 2017, "https://pics.filmaffinity.com/Thor_Ragnarok-702806827-large.jpg", "Esta es la descripcion de la pelicula4"),
+        new Movie("Iron Man 2", 2010, "https://images-na.ssl-images-amazon.com/images/I/71VZVXPhmKL._AC_SY741_.jpg", "Esta es la descripcion de la pelicula5"));
 
     @GetMapping("/text/movie")
     public String textMovie(Locale local) {
@@ -56,7 +61,7 @@ public class MoviesController {
 
     @PostMapping("/addMovie")
     public void add(@RequestBody Movie newMovie) {
-        listMovies.add(new Movie(newMovie.getTitle(), newMovie.getYear(), newMovie.getPoster()));
+        listMovies.add(new Movie(newMovie.getTitle(), newMovie.getYear(), newMovie.getPoster(), newMovie.getSynopsis()));
     }
 
     @PutMapping("/updateMovie/{id}")

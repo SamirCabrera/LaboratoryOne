@@ -17,3 +17,17 @@
     padding: 8px;
     border-radius: 8px;
 }
+.img_poster {
+    width: 100%;
+}
+
+.div_card {
+    display: inline-block;
+    clear: both;
+    padding: 32px;
+}
+
+.content_card {
+    float: left;
+    width: 100%;
+}
