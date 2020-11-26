@@ -31,3 +31,11 @@
     float: left;
     width: 100%;
 }
+
+.div_premier {
+    margin: 16px 0px;
+}
+
+.p_premier {
+    font-weight: bold;
+}

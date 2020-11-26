@@ -91,7 +91,7 @@
                               <div class="col">
 
                                 <div th:if="*{year == 2020}">
-                                  <span>¡Novedad!</span>
+                                  <span th:text="#{NOVELTY}"></span>
                                 </div>
 
                               </div>
@@ -99,63 +99,36 @@
                             </div>
                           </div>
 
-                          <p class="card-text"> Estreno:
-                            <span th:text="*{year}"></span>
-                          </p>
+                          <div class="container div_premier">
+                            <div class="row">
+
+                              <div class="col">
+
+                                <p class="card-text p_premier" th:text="#{PREMIERE}"></p>
+                                
+                              </div>
+
+                              <div class="col">
+
+                                <span th:text="*{year}"></span>
+
+                              </div>
+
+                            </div>
+                          </div>
 
                           <a th:href="@{movieModal/(id=*{id})}" 
                               class="btn btn-primary" 
                               data-toggle="modal" 
                               data-target="#exampleModal" 
-                              th:attrappend="data-target=*{id}">Detalles
+                              th:attrappend="data-target=*{id}">
+                                <span th:text="#{DETAIL}"></span>
                           </a>
                             
                         </div>
                     </div>   
         
-                    <div class="modal fade" id="exampleModal" 
-                      data-backdrop="static" data-keyboard="false" 
-                      tabindex="-1" aria-labelledby="staticBackdropLabel" 
-                      aria-hidden="true" th:attrappend="id=*{id}">
-
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-        
-                            <div class="modal-header">
-
-                              <h5 class="modal-title" id="staticBackdropLabel">
-                                <span th:text="*{title}"></span>
-                              </h5>
-        
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-
-                            </div>
-        
-                            <div class="modal-body">
-
-                              <div>
-                                <label>Año de estrano:
-                                    <span th:text="*{year}"></span>
-                                </label>
-                              </div>
-        
-                              <div>
-                                  <label>Sinopsis
-                                    <span th:text="*{synopsis}"></span>
-                                  </label>
-                              </div>
-
-                            </div>
-        
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                            
-                          </div>
-                        </div>
-                    </div>
+                    <div th:insert="~{modalDetail.html :: body}"></div>
         
             </div>
         </div>
