@@ -2,6 +2,7 @@ package com.laboratoryOne.API.Movies;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -26,7 +27,8 @@ public class MoviesController {
         new Movie("Doctor Strage", 2016, "https://images-na.ssl-images-amazon.com/images/I/71gyLVWIfIL._AC_SL1032_.jpg", "Esta es la descripcion de la pelicula2"),
         new Movie("Ant-Man", 2015, "https://images-na.ssl-images-amazon.com/images/I/71E9abm2ayL._AC_SL1111_.jpg", "Esta es la descripcion de la pelicula3"),
         new Movie("Thor: Ragnarok", 2017, "https://pics.filmaffinity.com/Thor_Ragnarok-702806827-large.jpg", "Esta es la descripcion de la pelicula4"),
-        new Movie("Iron Man 2", 2010, "https://images-na.ssl-images-amazon.com/images/I/71VZVXPhmKL._AC_SY741_.jpg", "Esta es la descripcion de la pelicula5"));
+        new Movie("Iron Man 2", 2010, "https://images-na.ssl-images-amazon.com/images/I/71VZVXPhmKL._AC_SY741_.jpg", "Esta es la descripcion de la pelicula5"),
+        new Movie("Black Widow", 2020, "https://m.media-amazon.com/images/M/MV5BMzFiODE0ZDUtN2IxNC00OTI5LTg4OWItZTE2MjU4ZTk2NjM5XkEyXkFqcGdeQXVyNDYzODU1ODM@._V1_.jpg", "Esta es la descripcion de la pelicula6"));
 
     @GetMapping("/text/movie")
     public String textMovie(Locale local) {

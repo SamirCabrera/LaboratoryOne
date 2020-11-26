@@ -76,21 +76,39 @@
                         <img th:src="*{poster}" class="img_poster">
         
                         <div class="card-body">
-                          
-                            <h5 class="card-title">
-                                <span th:text="*{title}"></span>
-                            </h5>
 
-                            <p class="card-text"> Estreno:
-                                <span th:text="*{year}"></span>
-                            </p>
+                          <div class="container">
+                            <div class="row">
 
-                            <a th:href="@{movieModal/(id=*{id})}" 
-                                class="btn btn-primary" 
-                                data-toggle="modal" 
-                                data-target="#exampleModal" 
-                                th:attrappend="data-target=*{id}">Detalles
-                            </a>
+                              <div class="col">
+
+                                <h6 class="card-title">
+                                  <span th:text="*{title}"></span>
+                                </h6>
+                                
+                              </div>
+
+                              <div class="col">
+
+                                <div th:if="*{year == 2020}">
+                                  <span>¡Novedad!</span>
+                                </div>
+
+                              </div>
+
+                            </div>
+                          </div>
+
+                          <p class="card-text"> Estreno:
+                            <span th:text="*{year}"></span>
+                          </p>
+
+                          <a th:href="@{movieModal/(id=*{id})}" 
+                              class="btn btn-primary" 
+                              data-toggle="modal" 
+                              data-target="#exampleModal" 
+                              th:attrappend="data-target=*{id}">Detalles
+                          </a>
                             
                         </div>
                     </div>   
